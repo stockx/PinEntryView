@@ -3,7 +3,7 @@
 //  PinEntryView
 //
 //  Created by Jeff Burt on 04/26/2017.
-//  Copyright (c) 2017 Jeff Burt. All rights reserved.
+//  Copyright (c) 2017 StockX. All rights reserved.
 //
 
 import UIKit
