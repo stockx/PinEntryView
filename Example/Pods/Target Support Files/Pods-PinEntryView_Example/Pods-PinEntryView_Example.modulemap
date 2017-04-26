@@ -1,0 +1,6 @@
+framework module Pods_PinEntryView_Example {
+  umbrella header "Pods-PinEntryView_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

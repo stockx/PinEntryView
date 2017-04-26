@@ -1,0 +1,22 @@
+{
+  "name": "PinEntryView",
+  "version": "0.1.0",
+  "summary": "A short description of PinEntryView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Jeff Burt/PinEntryView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Jeff Burt": "jburt1992@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Jeff Burt/PinEntryView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "PinEntryView/Classes/**/*"
+}
