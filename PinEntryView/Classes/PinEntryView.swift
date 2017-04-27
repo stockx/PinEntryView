@@ -99,6 +99,11 @@ extension PinEntryView: UITextFieldDelegate {
         textField.text = newText
         updateButtonStates()
         
+        // Dismiss the keyboard when the last letter is typed
+        if newText.characters.count == state?.pin?.characters.count ?? 0 {
+            textField.resignFirstResponder()
+        }
+        
         return false
     }
     
