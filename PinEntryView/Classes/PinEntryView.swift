@@ -117,6 +117,11 @@ extension PinEntryView: UITextFieldDelegate {
         // Set the focussed state
         updateButtonStates()
     }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        // Remove any focussed state
+        updateButtonStates()
+    }
 }
 
 // MARK - Internal
