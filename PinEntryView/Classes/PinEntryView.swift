@@ -71,7 +71,7 @@ extension PinEntryView: UITextFieldDelegate {
             return false
         }
         
-        let newText = (oldText as NSString).replacingCharacters(in: range, with: string)
+        let newText = (oldText as NSString).replacingCharacters(in: range, with: string).uppercased()
         
         // Disallow backspace if necessary
         guard state?.allowsBackspace == true || newText.characters.count > oldText.characters.count else {
@@ -97,6 +97,7 @@ fileprivate extension PinEntryView {
         let textField = UITextField()
         textField.delegate = self
         textField.isHidden = true
+        textField.autocapitalizationType = .allCharacters
         return textField
     }
     
