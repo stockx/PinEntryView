@@ -1,42 +1,24 @@
-#
-# Be sure to run `pod lib lint PinEntryView.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'PinEntryView'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of PinEntryView.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.version          = '1.0'
+  s.summary          = 'PinEntryView is a customizable view written in Swift that can be used to confirm alphanumeric pins.'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+PinEntryView is a customizable view written in Swift that can be used to confirm alphanumeric pins. Use cases include typing ACCEPT after reviewing Terms of Service and setting or confirming a passcode.
+
+Features:
+- Supports AutoLayout and has intrinsic size. Optionally set a height to make the boxes taller or a width to add more inner spacing between boxes.
+- Fully configurable in Interface Builder (supports @IBDesignable and @IBInspectable) and code.
+- Customizable for many different use cases.
+- Example app to demonstrate the various configurations.
                        DESC
 
-  s.homepage         = 'https://github.com/Jeff Burt/PinEntryView'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/StockX/PinEntryView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jeff Burt' => 'jburt1992@gmail.com' }
-  s.source           = { :git => 'https://github.com/Jeff Burt/PinEntryView.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/StockX/PinEntryView.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/jeffburtjr'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'PinEntryView/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'PinEntryView' => ['PinEntryView/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

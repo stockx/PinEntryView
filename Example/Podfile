@@ -2,7 +2,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '8.2'
 use_frameworks!
-inhibit_all_warnings!
 
 target 'PinEntryView_Example' do
   pod 'PinEntryView', :path => '../'

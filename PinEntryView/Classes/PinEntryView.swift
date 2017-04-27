@@ -172,9 +172,11 @@ fileprivate extension PinEntryView {
     }
     
     func commonInit() {
-        if pin != nil || allowsBackspace != nil || showsPlaceholder != nil || allowsAllCharacters != nil || completedBorderColor != nil {
-            state = State(pin: pin, allowsBackspace: allowsBackspace, showsPlaceholder: showsPlaceholder, allowsAllCharacters: allowsAllCharacters, completedBorderColor: completedBorderColor)
-        }
+        state = State(pin: pin,
+                      allowsBackspace: allowsBackspace,
+                      showsPlaceholder: showsPlaceholder,
+                      allowsAllCharacters: allowsAllCharacters,
+                      completedBorderColor: completedBorderColor)
         
         backgroundColor = .clear
         
