@@ -22,6 +22,7 @@ import UIKit
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
     @objc @IBInspectable fileprivate var pin: String? = "Excellent"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
+    @objc @IBInspectable fileprivate var showsHint: Bool = true
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,11 +50,14 @@ public extension PinEntryView {
     public struct State {
         public var pin: String?
         public var allowsBackspace: Bool
+        public var showsHint: Bool
         
         public init(pin: String?,
-                    allowsBackspace: Bool = true) {
+                    allowsBackspace: Bool = true,
+                    showsHint: Bool = true) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
+            self.showsHint = showsHint
         }
     }
     
@@ -83,12 +87,20 @@ extension PinEntryView: UITextFieldDelegate {
             return false
         }
         
-        buttons.forEach {
-            $0.setTitle(nil, for: .normal)
-        }
+        let pin = (state?.pin ?? "").uppercased()
+        let showsHint = state?.showsHint == true
         
-        for (i, character) in newText.characters.enumerated() {
-            buttons[i].setTitle("\(character)", for: .normal)
+        for (i, button) in buttons.enumerated() {
+            let newCharacter = newText[i]
+            
+            if newCharacter != "" {
+                button.setTitle(newCharacter, for: .normal)
+                button.setTitleColor(.black, for: .normal)
+            }
+            else {
+                button.setTitle(showsHint ? pin[i] : nil, for: .normal)
+                button.setTitleColor(.lightGray, for: .normal)
+            }
         }
         
         return true
@@ -109,7 +121,6 @@ fileprivate extension PinEntryView {
     func createButton() -> UIButton {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 2
         button.layer.borderWidth = 1
@@ -124,8 +135,8 @@ fileprivate extension PinEntryView {
     }
     
     func commonInit() {
-        if pin != nil || allowsBackspace != nil {
-            state = State(pin: pin, allowsBackspace: allowsBackspace)
+        if pin != nil || allowsBackspace != nil || showsHint != nil {
+            state = State(pin: pin, allowsBackspace: allowsBackspace, showsHint: showsHint)
         }
         
         backgroundColor = .clear
