@@ -91,29 +91,15 @@ extension PinEntryView: UITextFieldDelegate {
             return false
         }
         
-        let pin = (state?.pin ?? "").uppercased()
-        
         // Disallow entering non-matching characters if necessary
-        guard state?.allowAllCharacters == true || newText == pin.substring(to: newText.characters.count) else {
+        guard state?.allowAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.characters.count) else {
             return false
         }
         
-        let showsHint = state?.showsHint == true
+        textField.text = newText
+        updateButtonStates()
         
-        for (i, button) in buttons.enumerated() {
-            let newCharacter = newText[i]
-            
-            if newCharacter != "" {
-                button.setTitle(newCharacter, for: .normal)
-                button.setTitleColor(.black, for: .normal)
-            }
-            else {
-                button.setTitle(showsHint ? pin[i] : nil, for: .normal)
-                button.setTitleColor(.lightGray, for: .normal)
-            }
-        }
-        
-        return true
+        return false
     }
 }
 
@@ -168,6 +154,9 @@ fileprivate extension PinEntryView {
         }
         
         constrainButtons()
+        
+        textField.text = nil
+        updateButtonStates()
     }
     
     func constrainButtons() {
@@ -234,5 +223,21 @@ fileprivate extension PinEntryView {
     
     @objc func didTapButton(_ sender: Any) {
         textField.becomeFirstResponder()
+    }
+    
+    func updateButtonStates() {
+        let showsHint = state?.showsHint == true
+        
+        for (i, button) in buttons.enumerated() {
+            if let newCharacter = textField.text?[i],
+                newCharacter != "" {
+                button.setTitle(newCharacter, for: .normal)
+                button.setTitleColor(.black, for: .normal)
+            }
+            else {
+                button.setTitle(showsHint ? state?.pin?.uppercased()[i] : nil, for: .normal)
+                button.setTitleColor(.lightGray, for: .normal)
+            }
+        }
     }
 }
