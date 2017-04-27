@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        pinEntryView.delegate = self
+        
         let state = pinEntryView.state
         pinTextField.text = state?.pin?.uppercased()
         allowsBackspaceSwitch.isOn = state?.allowsBackspace == true
@@ -32,6 +34,12 @@ class ViewController: UIViewController {
         state?.showsPlaceholder = showsPlaceholderSwitch.isOn
         state?.allowsAllCharacters = allowsAllCharactersSwitch.isOn
         pinEntryView.state = state
+    }
+}
+
+extension ViewController: PinEntryViewDelegate {
+    func pinEntryView(_ view: PinEntryView, didFinishEditing pin: String) {
+        print("User finished editing PIN: \(pin)")
     }
 }
 
@@ -52,4 +60,3 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
-

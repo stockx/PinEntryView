@@ -8,12 +8,19 @@
 
 import UIKit
 
+public protocol PinEntryViewDelegate: class {
+    /** Called when the user fills out every box with text. */
+    func pinEntryView(_ view: PinEntryView, didFinishEditing pin: String)
+}
+
 @IBDesignable public class PinEntryView: UIView {
     public var state: State? {
         didSet {
             update(oldValue: oldValue)
         }
     }
+    
+    public weak var delegate: PinEntryViewDelegate?
     
     fileprivate lazy var textField: UITextField = self.createTextField()
     fileprivate var buttons = [UIButton]()
@@ -115,6 +122,7 @@ extension PinEntryView: UITextFieldDelegate {
         // Dismiss the keyboard when the last letter is typed
         if newText.characters.count == state?.pin?.characters.count ?? 0 {
             textField.resignFirstResponder()
+            delegate?.pinEntryView(self, didFinishEditing: newText)
         }
         
         return false
