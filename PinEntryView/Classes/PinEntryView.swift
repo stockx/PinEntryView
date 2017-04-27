@@ -112,6 +112,10 @@ extension PinEntryView: UITextFieldDelegate {
         return true
     }
     
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Set the focussed state
+        updateButtonStates()
+    }
 }
 
 // MARK - Internal
@@ -132,7 +136,6 @@ fileprivate extension PinEntryView {
         button.backgroundColor = .white
         button.layer.cornerRadius = 2
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.lightGray.cgColor
         return button
     }
     
@@ -241,6 +244,8 @@ fileprivate extension PinEntryView {
         let showsHint = state?.showsHint == true
         
         for (i, button) in buttons.enumerated() {
+            button.layer.borderColor = UIColor.lightGray.cgColor
+
             if let newCharacter = textField.text?[i],
                 newCharacter != "" {
                 button.setTitle(newCharacter, for: .normal)
@@ -249,6 +254,11 @@ fileprivate extension PinEntryView {
             else {
                 button.setTitle(showsHint ? state?.pin?.uppercased()[i] : nil, for: .normal)
                 button.setTitleColor(.lightGray, for: .normal)
+                
+                let isFocussed = textField.isFirstResponder && i == textField.text?.characters.count ?? 0
+                if isFocussed {
+                    button.layer.borderColor = UIColor.black.cgColor
+                }
             }
         }
     }
