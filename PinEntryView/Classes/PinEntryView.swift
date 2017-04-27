@@ -19,7 +19,9 @@ import UIKit
     fileprivate var buttons = [UIButton]()
     fileprivate var buttonInnerSpacerViews = [UIView]()
     
-    @objc @IBInspectable fileprivate var defaultPin: String?
+    // Defaults that can be set inside IB. Use 'state' when setting values in code.
+    @objc @IBInspectable fileprivate var pin: String?
+    @objc @IBInspectable fileprivate var allowsBackspace: Bool = true
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,10 +47,13 @@ import UIKit
 
 public extension PinEntryView {
     public struct State {
-        public let pin: String
+        public var pin: String?
+        public var allowsBackspace: Bool
         
-        public init(pin: String) {
+        public init(pin: String?,
+                    allowsBackspace: Bool = true) {
             self.pin = pin
+            self.allowsBackspace = allowsBackspace
         }
     }
     
@@ -61,7 +66,28 @@ public extension PinEntryView {
 }
 
 extension PinEntryView: UITextFieldDelegate {
-    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text else {
+            return false
+        }
+        
+        let newText = (oldText as NSString).replacingCharacters(in: range, with: string)
+        
+        // Disallow backspace if necessary
+        guard state?.allowsBackspace == true || newText.characters.count > oldText.characters.count else {
+            return false
+        }
+        
+        buttons.forEach {
+            $0.setTitle(nil, for: .normal)
+        }
+        
+        for (i, character) in newText.characters.enumerated() {
+            buttons[i].setTitle("\(character)", for: .normal)
+        }
+        
+        return true
+    }
 }
 
 // MARK - Internal
@@ -77,6 +103,7 @@ fileprivate extension PinEntryView {
     func createButton() -> UIButton {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 2
         button.layer.borderWidth = 1
@@ -91,11 +118,14 @@ fileprivate extension PinEntryView {
     }
     
     func commonInit() {
-        if let pin = defaultPin {
-            state = State(pin: pin)
+        if pin != nil || allowsBackspace != nil {
+            state = State(pin: pin, allowsBackspace: allowsBackspace)
         }
         
         backgroundColor = .clear
+        
+        addSubview(textField)
+        textField.makeEdgesEqualToSuperview()
     }
     
     func createNewButtons() {
@@ -104,7 +134,7 @@ fileprivate extension PinEntryView {
         }
         buttons.removeAll()
         
-        state?.pin.characters.forEach { _ in
+        state?.pin?.characters.forEach { _ in
             let button = createButton()
             buttons.append(button)
             addSubview(button)
@@ -176,6 +206,6 @@ fileprivate extension PinEntryView {
     }
     
     @objc func didTapButton(_ sender: Any) {
-        
+        textField.becomeFirstResponder()
     }
 }

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,20 +23,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYA-hX-gxo" customClass="PinEntryView" customModule="PinEntryView">
-                                <rect key="frame" x="30" y="316" width="315" height="35"/>
+                                <rect key="frame" x="30" y="149.5" width="315" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="HjW-l3-0Ve"/>
                                     <constraint firstAttribute="width" constant="315" placeholder="YES" id="bJG-eJ-D1w"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="defaultPin" value="Excellent"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="pin" value="Excellent"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsBackspace" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94116239536557977" green="0.93661571712709879" blue="0.94570907360406087" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="UYA-hX-gxo" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="0eL-ua-Ttb"/>
+                            <constraint firstItem="UYA-hX-gxo" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="1:2" id="0eL-ua-Ttb"/>
                             <constraint firstItem="UYA-hX-gxo" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="eL7-w2-jlI"/>
                         </constraints>
                     </view>

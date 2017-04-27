@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Can also update the pin at anytime in code
-//        pinEntryView.state = PinEntryView.State(pin: "Great")
+//        pinEntryView.state = PinEntryView.State(pin: "Great", allowsBackspace: false)
     }
 }
 
