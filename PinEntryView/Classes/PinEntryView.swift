@@ -23,7 +23,7 @@ import UIKit
     @objc @IBInspectable fileprivate var pin: String? = "Excellent"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsHint: Bool = true
-    @objc @IBInspectable fileprivate var allowAllCharacters: Bool = false
+    @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,16 +52,16 @@ public extension PinEntryView {
         public var pin: String?
         public var allowsBackspace: Bool
         public var showsHint: Bool
-        public var allowAllCharacters: Bool
+        public var allowsAllCharacters: Bool
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
                     showsHint: Bool = true,
-                    allowAllCharacters: Bool = true) {
+                    allowsAllCharacters: Bool = true) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsHint = showsHint
-            self.allowAllCharacters = allowAllCharacters
+            self.allowsAllCharacters = allowsAllCharacters
         }
     }
     
@@ -93,7 +93,7 @@ extension PinEntryView: UITextFieldDelegate {
         }
         
         // Disallow entering non-matching characters if necessary
-        guard state?.allowAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.characters.count) else {
+        guard state?.allowsAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.characters.count) else {
             return false
         }
         
@@ -147,8 +147,8 @@ fileprivate extension PinEntryView {
     }
     
     func commonInit() {
-        if pin != nil || allowsBackspace != nil || showsHint != nil || allowAllCharacters != nil {
-            state = State(pin: pin, allowsBackspace: allowsBackspace, showsHint: showsHint, allowAllCharacters: allowAllCharacters)
+        if pin != nil || allowsBackspace != nil || showsHint != nil || allowsAllCharacters != nil {
+            state = State(pin: pin, allowsBackspace: allowsBackspace, showsHint: showsHint, allowsAllCharacters: allowsAllCharacters)
         }
         
         backgroundColor = .clear
