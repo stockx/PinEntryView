@@ -137,13 +137,35 @@ extension UIView {
     }
     
     /**
+     Applies a constraint to the receiver with attribute `attribute` and
+     the specified constant.
+     */
+    func makeAttribute(_ attribute: NSLayoutAttribute, greaterThanOrEqualTo constant: CGFloat) {
+        guard let superview = superview else {
+            return
+        }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraint = NSLayoutConstraint(item: self,
+                                            attribute: attribute,
+                                            relatedBy: .greaterThanOrEqual,
+                                            toItem: nil,
+                                            attribute: .notAnAttribute,
+                                            multiplier: 1.0,
+                                            constant: constant)
+        superview.addConstraint(constraint)
+    }
+    
+    /**
      Applies a constraint with the attribute `attribute` from the receiver to
      the view `otherView` with attribute `attribute`.
      */
     func makeAttribute(_ attribute: NSLayoutAttribute,
                        equalToOtherView otherView: UIView,
                        attribute otherAttribute: NSLayoutAttribute,
-                       constant: CGFloat = 0) {
+                       constant: CGFloat = 0,
+                       multiplier: CGFloat = 1) {
         guard let sv = otherView.superview,
             sv == self.superview else {
                 return
@@ -156,11 +178,36 @@ extension UIView {
                                            relatedBy: .equal,
                                            toItem: otherView,
                                            attribute: otherAttribute,
-                                           multiplier: 1.0,
+                                           multiplier: multiplier,
                                            constant: constant)
         sv.addConstraint(attribute)
     }
     
+    /**
+     Applies a constraint with the attribute `attribute` from the receiver to
+     the view `otherView` with attribute `attribute`.
+     */
+    func makeAttribute(_ attribute: NSLayoutAttribute,
+                       greaterThanOrEqualToOtherView otherView: UIView,
+                       attribute otherAttribute: NSLayoutAttribute,
+                       constant: CGFloat = 0,
+                       multiplier: CGFloat = 1) {
+        guard let sv = otherView.superview,
+            sv == self.superview else {
+                return
+        }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        let attribute = NSLayoutConstraint(item: self,
+                                           attribute: attribute,
+                                           relatedBy: .greaterThanOrEqual,
+                                           toItem: otherView,
+                                           attribute: otherAttribute,
+                                           multiplier: multiplier,
+                                           constant: constant)
+        sv.addConstraint(attribute)
+    }
     
     // MARK: Utility
     
