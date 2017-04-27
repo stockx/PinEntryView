@@ -7,18 +7,16 @@
 //
 
 import UIKit
+import PinEntryView
 
 class ViewController: UIViewController {
+    @IBOutlet weak var pinEntryView: PinEntryView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Can also update the pin at anytime in code
+//        pinEntryView.state = PinEntryView.State(pin: "Great")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
 
