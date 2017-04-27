@@ -24,6 +24,7 @@ import UIKit
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
+    @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,15 +54,18 @@ public extension PinEntryView {
         public var allowsBackspace: Bool
         public var showsPlaceholder: Bool
         public var allowsAllCharacters: Bool
+        public var completedBorderColor: UIColor
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
                     showsPlaceholder: Bool = true,
-                    allowsAllCharacters: Bool = true) {
+                    allowsAllCharacters: Bool = true,
+                    completedBorderColor: UIColor = .green) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsPlaceholder = showsPlaceholder
             self.allowsAllCharacters = allowsAllCharacters
+            self.completedBorderColor = completedBorderColor
         }
     }
     
@@ -71,6 +75,9 @@ public extension PinEntryView {
             createNewButtons()
         }
         else if oldValue?.showsPlaceholder != state?.showsPlaceholder {
+            updateButtonStates()
+        }
+        else if oldValue?.completedBorderColor != state?.completedBorderColor {
             updateButtonStates()
         }
     }
@@ -155,8 +162,8 @@ fileprivate extension PinEntryView {
     }
     
     func commonInit() {
-        if pin != nil || allowsBackspace != nil || showsPlaceholder != nil || allowsAllCharacters != nil {
-            state = State(pin: pin, allowsBackspace: allowsBackspace, showsPlaceholder: showsPlaceholder, allowsAllCharacters: allowsAllCharacters)
+        if pin != nil || allowsBackspace != nil || showsPlaceholder != nil || allowsAllCharacters != nil || completedBorderColor != nil {
+            state = State(pin: pin, allowsBackspace: allowsBackspace, showsPlaceholder: showsPlaceholder, allowsAllCharacters: allowsAllCharacters, completedBorderColor: completedBorderColor)
         }
         
         backgroundColor = .clear
@@ -255,12 +262,12 @@ fileprivate extension PinEntryView {
         let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
-            button.layer.borderColor = UIColor.lightGray.cgColor
 
             if let newCharacter = textField.text?[i],
                 newCharacter != "" {
                 button.setTitle(newCharacter, for: .normal)
                 button.setTitleColor(.black, for: .normal)
+                button.layer.borderColor = (state?.completedBorderColor ?? .lightGray).cgColor
             }
             else {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
@@ -269,6 +276,9 @@ fileprivate extension PinEntryView {
                 let isFocussed = textField.isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
                     button.layer.borderColor = UIColor.black.cgColor
+                }
+                else {
+                    button.layer.borderColor = UIColor.lightGray.cgColor
                 }
             }
         }
