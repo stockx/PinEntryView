@@ -83,6 +83,7 @@ extension PinEntryView: UITextFieldDelegate {
         
         // Don't allow user to keep typing once all buttons are filled
         guard newText.characters.count <= state?.pin?.characters.count ?? 0 else {
+            textField.resignFirstResponder()
             return false
         }
         
