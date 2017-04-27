@@ -73,6 +73,11 @@ extension PinEntryView: UITextFieldDelegate {
         
         let newText = (oldText as NSString).replacingCharacters(in: range, with: string).uppercased()
         
+        // Don't allow user to keep typing once all buttons are filled
+        guard newText.characters.count <= state?.pin?.characters.count ?? 0 else {
+            return false
+        }
+        
         // Disallow backspace if necessary
         guard state?.allowsBackspace == true || newText.characters.count > oldText.characters.count else {
             return false
