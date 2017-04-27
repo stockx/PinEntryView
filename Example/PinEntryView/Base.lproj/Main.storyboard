@@ -29,10 +29,6 @@
                                     <constraint firstAttribute="height" constant="35" id="HjW-l3-0Ve"/>
                                     <constraint firstAttribute="width" constant="315" placeholder="YES" id="bJG-eJ-D1w"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="pin" value="Excellent"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsBackspace" value="NO"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94116239536557977" green="0.93661571712709879" blue="0.94570907360406087" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

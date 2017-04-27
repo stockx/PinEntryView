@@ -20,8 +20,8 @@ import UIKit
     fileprivate var buttonInnerSpacerViews = [UIView]()
     
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
-    @objc @IBInspectable fileprivate var pin: String?
-    @objc @IBInspectable fileprivate var allowsBackspace: Bool = true
+    @objc @IBInspectable fileprivate var pin: String? = "Excellent"
+    @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
