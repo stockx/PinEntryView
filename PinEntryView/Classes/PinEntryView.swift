@@ -133,7 +133,7 @@ fileprivate extension PinEntryView {
     
     func createButton() -> UIButton {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(openKeyboard), for: .touchUpInside)
         button.backgroundColor = .white
         button.layer.cornerRadius = 2
         button.layer.borderWidth = 1
@@ -155,6 +155,8 @@ fileprivate extension PinEntryView {
         
         addSubview(textField)
         textField.makeEdgesEqualToSuperview()
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openKeyboard)))
     }
     
     func createNewButtons() {
@@ -237,7 +239,7 @@ fileprivate extension PinEntryView {
         }
     }
     
-    @objc func didTapButton(_ sender: Any) {
+    @objc func openKeyboard() {
         textField.becomeFirstResponder()
     }
     
