@@ -70,6 +70,9 @@ public extension PinEntryView {
             textField.text = nil
             createNewButtons()
         }
+        else if oldValue?.showsHint != state?.showsHint {
+            updateButtonStates()
+        }
     }
 }
 
