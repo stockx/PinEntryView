@@ -20,7 +20,7 @@ import UIKit
     fileprivate var buttonInnerSpacerViews = [UIView]()
     
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
-    @objc @IBInspectable fileprivate var pin: String? = "Excellent"
+    @objc @IBInspectable fileprivate var pin: String? = "EXCELLENT"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
@@ -43,6 +43,8 @@ import UIKit
     override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         commonInit()
+        textField.text = pin?[0..<2]
+        updateButtonStates()
     }
 }
 
