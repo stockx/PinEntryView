@@ -27,7 +27,7 @@ public protocol PinEntryViewDelegate: class {
     fileprivate var buttonInnerSpacerViews = [UIView]()
     
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
-    @objc @IBInspectable fileprivate var pin: String? = "EXCELLENT"
+    @objc @IBInspectable fileprivate var pin: String? = "ACCEPT"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
