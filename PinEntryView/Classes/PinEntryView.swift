@@ -101,6 +101,12 @@ extension PinEntryView: UITextFieldDelegate {
         
         return false
     }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
 
 // MARK - Internal
@@ -111,6 +117,7 @@ fileprivate extension PinEntryView {
         textField.delegate = self
         textField.isHidden = true
         textField.autocapitalizationType = .allCharacters
+        textField.returnKeyType = .done
         return textField
     }
     
