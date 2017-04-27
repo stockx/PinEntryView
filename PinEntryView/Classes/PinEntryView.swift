@@ -22,7 +22,7 @@ import UIKit
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
     @objc @IBInspectable fileprivate var pin: String? = "Excellent"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
-    @objc @IBInspectable fileprivate var showsHint: Bool = true
+    @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
     
     override public init(frame: CGRect) {
@@ -51,16 +51,16 @@ public extension PinEntryView {
     public struct State {
         public var pin: String?
         public var allowsBackspace: Bool
-        public var showsHint: Bool
+        public var showsPlaceholder: Bool
         public var allowsAllCharacters: Bool
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
-                    showsHint: Bool = true,
+                    showsPlaceholder: Bool = true,
                     allowsAllCharacters: Bool = true) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
-            self.showsHint = showsHint
+            self.showsPlaceholder = showsPlaceholder
             self.allowsAllCharacters = allowsAllCharacters
         }
     }
@@ -70,7 +70,7 @@ public extension PinEntryView {
             textField.text = nil
             createNewButtons()
         }
-        else if oldValue?.showsHint != state?.showsHint {
+        else if oldValue?.showsPlaceholder != state?.showsPlaceholder {
             updateButtonStates()
         }
     }
@@ -155,8 +155,8 @@ fileprivate extension PinEntryView {
     }
     
     func commonInit() {
-        if pin != nil || allowsBackspace != nil || showsHint != nil || allowsAllCharacters != nil {
-            state = State(pin: pin, allowsBackspace: allowsBackspace, showsHint: showsHint, allowsAllCharacters: allowsAllCharacters)
+        if pin != nil || allowsBackspace != nil || showsPlaceholder != nil || allowsAllCharacters != nil {
+            state = State(pin: pin, allowsBackspace: allowsBackspace, showsPlaceholder: showsPlaceholder, allowsAllCharacters: allowsAllCharacters)
         }
         
         backgroundColor = .clear
@@ -252,7 +252,7 @@ fileprivate extension PinEntryView {
     }
     
     func updateButtonStates() {
-        let showsHint = state?.showsHint == true
+        let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
             button.layer.borderColor = UIColor.lightGray.cgColor
@@ -263,7 +263,7 @@ fileprivate extension PinEntryView {
                 button.setTitleColor(.black, for: .normal)
             }
             else {
-                button.setTitle(showsHint ? state?.pin?.uppercased()[i] : nil, for: .normal)
+                button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
                 button.setTitleColor(.lightGray, for: .normal)
                 
                 let isFocussed = textField.isFirstResponder && i == textField.text?.characters.count ?? 0
