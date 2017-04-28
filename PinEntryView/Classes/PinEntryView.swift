@@ -53,6 +53,17 @@ public protocol PinEntryViewDelegate: class {
         textField.text = pin?[0..<2]
         updateButtonStates()
     }
+    
+    /** 
+     Enters into an error state. When editing, colors the currently focussed 
+     box red and leaves the empty boxes to the right light gray. When not 
+     editing, colors all boxes that are not filled out red. The error state 
+     gets cleared as soon as editing begins/ends or when typing occurs. 
+     */
+    public func showErrorState() {
+        updateButtonStates(focusBorderColor: .red,
+                           inactiveBorderColor: textField.isFirstResponder ? .lightGray : .red)
+    }
 }
 
 //  MARK - State
@@ -113,6 +124,7 @@ extension PinEntryView: UITextFieldDelegate {
         
         // Disallow entering non-matching characters if necessary
         guard state?.allowsAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.characters.count) else {
+            showErrorState()
             return false
         }
         
@@ -270,7 +282,7 @@ fileprivate extension PinEntryView {
         textField.becomeFirstResponder()
     }
     
-    func updateButtonStates() {
+    func updateButtonStates(focusBorderColor: UIColor = .black, inactiveBorderColor: UIColor = .lightGray) {
         let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
@@ -287,10 +299,10 @@ fileprivate extension PinEntryView {
                 
                 let isFocussed = textField.isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
-                    button.layer.borderColor = UIColor.black.cgColor
+                    button.layer.borderColor = focusBorderColor.cgColor
                 }
                 else {
-                    button.layer.borderColor = UIColor.lightGray.cgColor
+                    button.layer.borderColor = inactiveBorderColor.cgColor
                 }
             }
         }

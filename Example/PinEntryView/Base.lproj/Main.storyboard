@@ -104,6 +104,13 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="N8D-pL-Z0W"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgQ-cX-9hj">
+                                <rect key="frame" x="30" y="431" width="315" height="30"/>
+                                <state key="normal" title="Show Error State"/>
+                                <connections>
+                                    <action selector="didTapShowErrorStateButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="T9x-Y2-7zF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94116239536557977" green="0.93661571712709879" blue="0.94570907360406087" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -126,12 +133,15 @@
                             <constraint firstItem="Tum-OA-nKb" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="VGV-IX-lDZ"/>
                             <constraint firstItem="eQB-ds-5hs" firstAttribute="leading" secondItem="1sz-zL-sfA" secondAttribute="leading" id="c1j-Uy-vVY"/>
                             <constraint firstItem="UYA-hX-gxo" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="eL7-w2-jlI"/>
+                            <constraint firstItem="jgQ-cX-9hj" firstAttribute="top" secondItem="mXX-bH-3xm" secondAttribute="bottom" constant="20" id="fSk-mC-kJq"/>
                             <constraint firstItem="JX6-bh-5FL" firstAttribute="top" secondItem="euB-QP-4a7" secondAttribute="bottom" constant="20" id="gpI-Uv-azq"/>
                             <constraint firstItem="s8E-R1-Cmy" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="iKQ-4Y-WZ4"/>
                             <constraint firstItem="OFr-vP-rY6" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="kjU-BO-1Ce"/>
+                            <constraint firstItem="jgQ-cX-9hj" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="nvF-3z-n3d"/>
                             <constraint firstItem="Nya-dW-cg3" firstAttribute="top" secondItem="UYA-hX-gxo" secondAttribute="bottom" constant="20" id="oFc-vk-QSs"/>
                             <constraint firstItem="aKk-qd-Ea1" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="pSd-hY-1vu"/>
                             <constraint firstItem="mXX-bH-3xm" firstAttribute="top" secondItem="eQB-ds-5hs" secondAttribute="bottom" constant="20" id="pk5-Ph-3Fa"/>
+                            <constraint firstItem="jgQ-cX-9hj" firstAttribute="leading" secondItem="1sz-zL-sfA" secondAttribute="leading" id="sHe-6x-cwq"/>
                             <constraint firstItem="s8E-R1-Cmy" firstAttribute="top" secondItem="Nya-dW-cg3" secondAttribute="bottom" constant="20" id="t5q-Jj-Ece"/>
                             <constraint firstItem="Tum-OA-nKb" firstAttribute="centerY" secondItem="eQB-ds-5hs" secondAttribute="centerY" id="u0q-8q-19G"/>
                             <constraint firstItem="oyb-SU-jPO" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="y5R-M9-izl"/>

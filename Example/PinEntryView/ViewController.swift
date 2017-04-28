@@ -47,6 +47,10 @@ class ViewController: UIViewController {
         state?.allowsAllCharacters = allowsAllCharactersSwitch.isOn
         pinEntryView.state = state
     }
+    
+    @IBAction func didTapShowErrorStateButton(_ sender: Any) {
+        pinEntryView.showErrorState()
+    }
 }
 
 extension ViewController: PinEntryViewDelegate {
