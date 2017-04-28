@@ -62,6 +62,7 @@ public protocol PinEntryViewDelegate: class {
         textField.text = state?.pin
         updateButtonStates()
         textField.resignFirstResponder()
+        delegate?.pinEntryView(self, didFinishEditing: textField.text ?? "")
     }
     
     /** 
