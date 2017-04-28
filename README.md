@@ -27,7 +27,7 @@ Description
 - [x] Customizable for many different use cases.
 - [x] Example app to demonstrate the various configurations.
 
-![simulator screen shot apr 27 2017 5 06 24 pm](https://cloud.githubusercontent.com/assets/2835199/25504514/2dfbd170-2b6c-11e7-81ed-3df4dc49c0af.png)
+![Example Project Screenshot](https://cloud.githubusercontent.com/assets/2835199/25539360/d8ca88be-2c14-11e7-809d-5ef620524d1a.png)
 
 <a name="installation"> Installation </a>
 --------------
