@@ -55,6 +55,16 @@ public protocol PinEntryViewDelegate: class {
     }
     
     /** 
+     Fills out each box with the pin and updates the button states as if the 
+     user typed the pin in manually.
+     */
+    public func fillInPin() {
+        textField.text = state?.pin
+        updateButtonStates()
+        textField.resignFirstResponder()
+    }
+    
+    /** 
      Enters into an error state. When editing, colors the currently focussed 
      box red and leaves the empty boxes to the right light gray. When not 
      editing, colors all boxes that are not filled out red. The error state 

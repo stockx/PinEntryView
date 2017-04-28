@@ -51,6 +51,10 @@ class ViewController: UIViewController {
     @IBAction func didTapShowErrorStateButton(_ sender: Any) {
         pinEntryView.showErrorState()
     }
+    
+    @IBAction func didTapFillinPinButton(_ sender: Any) {
+        pinEntryView.fillInPin()
+    }
 }
 
 extension ViewController: PinEntryViewDelegate {
