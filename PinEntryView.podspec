@@ -1,6 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'PinEntryView'
   s.version          = '1.0'
+  s.screenshot       = 'https://cloud.githubusercontent.com/assets/2835199/25539360/d8ca88be-2c14-11e7-809d-5ef620524d1a.png'
   s.summary          = 'PinEntryView is a customizable view written in Swift that can be used to confirm alphanumeric pins.'
   s.description      = <<-DESC
 PinEntryView is a customizable view written in Swift that can be used to confirm alphanumeric pins. Use cases include typing ACCEPT after reviewing Terms of Service and setting or confirming a passcode.
