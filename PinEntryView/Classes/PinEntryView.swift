@@ -59,7 +59,7 @@ public protocol PinEntryViewDelegate: class {
      user typed the pin in manually.
      */
     public func fillInPin() {
-        textField.text = state?.pin
+        textField.text = state?.pin.uppercased()
         updateButtonStates()
         textField.resignFirstResponder()
         delegate?.pinEntryView(self, didFinishEditing: textField.text ?? "")
