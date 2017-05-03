@@ -11,6 +11,9 @@ import UIKit
 public protocol PinEntryViewDelegate: class {
     /** Called when the user fills out every box with text. */
     func pinEntryView(_ view: PinEntryView, didFinishEditing pin: String)
+    
+    /** Called when the user taps the return key on the keyboard. */
+    func pinEntryViewDidTapKeyboardReturnKey(_ view: PinEntryView)
 }
 
 @IBDesignable public class PinEntryView: UIView {
@@ -32,6 +35,28 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
     @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
+    
+    public override var canBecomeFirstResponder: Bool {
+        return textField.canBecomeFirstResponder
+    }
+
+    public override var canResignFirstResponder: Bool {
+        return textField.canResignFirstResponder
+    }
+    
+    public override var isFirstResponder: Bool {
+        return textField.isFirstResponder
+    }
+    
+    @discardableResult
+    public override func becomeFirstResponder() -> Bool {
+        return textField.becomeFirstResponder()
+    }
+    
+    @discardableResult
+    public override func resignFirstResponder() -> Bool {
+        return textField.resignFirstResponder()
+    }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,7 +86,6 @@ public protocol PinEntryViewDelegate: class {
     public func fillInPin() {
         textField.text = state?.pin?.uppercased()
         updateButtonStates()
-        textField.resignFirstResponder()
         delegate?.pinEntryView(self, didFinishEditing: textField.text ?? "")
     }
     
@@ -73,7 +97,7 @@ public protocol PinEntryViewDelegate: class {
      */
     public func showErrorState() {
         updateButtonStates(focusBorderColor: .red,
-                           inactiveBorderColor: textField.isFirstResponder ? .lightGray : .red)
+                           inactiveBorderColor: isFirstResponder ? .lightGray : .red)
     }
 }
 
@@ -86,21 +110,26 @@ public extension PinEntryView {
         public var showsPlaceholder: Bool
         public var allowsAllCharacters: Bool
         public var completedBorderColor: UIColor
+        public var returnKeyType: UIReturnKeyType
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
                     showsPlaceholder: Bool = true,
                     allowsAllCharacters: Bool = true,
-                    completedBorderColor: UIColor = .green) {
+                    completedBorderColor: UIColor = .green,
+                    returnKeyType: UIReturnKeyType) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsPlaceholder = showsPlaceholder
             self.allowsAllCharacters = allowsAllCharacters
             self.completedBorderColor = completedBorderColor
+            self.returnKeyType = returnKeyType
         }
     }
     
     internal func update(oldValue: State?) {
+        textField.returnKeyType = state?.returnKeyType ?? .done
+        
         if oldValue?.pin != state?.pin {
             textField.text = nil
             createNewButtons()
@@ -124,7 +153,7 @@ extension PinEntryView: UITextFieldDelegate {
         
         // Don't allow user to keep typing once all buttons are filled
         guard newText.characters.count <= state?.pin?.characters.count ?? 0 else {
-            textField.resignFirstResponder()
+            delegate?.pinEntryViewDidTapKeyboardReturnKey(self)
             return false
         }
         
@@ -142,9 +171,8 @@ extension PinEntryView: UITextFieldDelegate {
         textField.text = newText
         updateButtonStates()
         
-        // Dismiss the keyboard when the last letter is typed
+        // The last letter is typed, which means we're all done
         if newText.characters.count == state?.pin?.characters.count ?? 0 {
-            textField.resignFirstResponder()
             delegate?.pinEntryView(self, didFinishEditing: newText)
         }
         
@@ -152,7 +180,7 @@ extension PinEntryView: UITextFieldDelegate {
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        delegate?.pinEntryViewDidTapKeyboardReturnKey(self)
         return true
     }
     
@@ -175,7 +203,6 @@ fileprivate extension PinEntryView {
         textField.delegate = self
         textField.isHidden = true
         textField.autocapitalizationType = .allCharacters
-        textField.returnKeyType = .done
         return textField
     }
     
@@ -199,7 +226,8 @@ fileprivate extension PinEntryView {
                       allowsBackspace: allowsBackspace,
                       showsPlaceholder: showsPlaceholder,
                       allowsAllCharacters: allowsAllCharacters,
-                      completedBorderColor: completedBorderColor)
+                      completedBorderColor: completedBorderColor,
+                      returnKeyType: .done)
         
         backgroundColor = .clear
         
@@ -290,7 +318,7 @@ fileprivate extension PinEntryView {
     }
     
     @objc func openKeyboard() {
-        textField.becomeFirstResponder()
+        becomeFirstResponder()
     }
     
     func updateButtonStates(focusBorderColor: UIColor = .black, inactiveBorderColor: UIColor = .lightGray) {
@@ -308,7 +336,7 @@ fileprivate extension PinEntryView {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
                 button.setTitleColor(.lightGray, for: .normal)
                 
-                let isFocussed = textField.isFirstResponder && i == textField.text?.characters.count ?? 0
+                let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
                     button.layer.borderColor = focusBorderColor.cgColor
                 }

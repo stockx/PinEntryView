@@ -60,6 +60,11 @@ class ViewController: UIViewController {
 extension ViewController: PinEntryViewDelegate {
     func pinEntryView(_ view: PinEntryView, didFinishEditing pin: String) {
         print("User finished editing PIN: \(pin)")
+        view.resignFirstResponder()
+    }
+    
+    func pinEntryViewDidTapKeyboardReturnKey(_ view: PinEntryView) {
+        view.resignFirstResponder()
     }
 }
 
