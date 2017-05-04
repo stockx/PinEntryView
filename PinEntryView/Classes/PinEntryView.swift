@@ -203,6 +203,8 @@ fileprivate extension PinEntryView {
         textField.delegate = self
         textField.isHidden = true
         textField.autocapitalizationType = .allCharacters
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
         return textField
     }
     
