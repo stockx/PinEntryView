@@ -325,7 +325,6 @@ fileprivate extension PinEntryView {
         let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
-
             if let newCharacter = textField.text?[i],
                 newCharacter != "" {
                 button.setTitle(newCharacter, for: .normal)
@@ -334,7 +333,7 @@ fileprivate extension PinEntryView {
             }
             else {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
-                button.setTitleColor(.lightGray, for: .normal)
+                button.setTitleColor(UIColor(white: 0.8, alpha: 1), for: .normal) // lighter gray
                 
                 let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
