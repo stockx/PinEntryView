@@ -42,7 +42,7 @@ CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install 
 $ gem install cocoapods
 ```
 
-To integrate `Punchcard` into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate `PinEntryView` into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 pod 'PinEntryView'
@@ -54,7 +54,7 @@ Then, run the following command:
 $ pod install
 ```
 
-In case Xcode complains (<i>"Cannot load underlying module for Punchcard"</i>) go to Product and choose Clean (or simply press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>K</kbd>).
+In case Xcode complains (<i>"Cannot load underlying module for PinEntryView"</i>) go to Product and choose Clean (or simply press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>K</kbd>).
 
 ### Manually
 
