@@ -75,14 +75,14 @@ If you prefer not to use CocoaPods, you can integrate `PinEntryView` into your p
 ```swift
 var pinEntryView = PinEntryView()
 pinEntryView.state = PinEntryView.State(pin: "ACCEPT",
-                                  allowsBackspace: true,
-                                  showsPlaceholder: true,
-                                  allowsAllCharacters: false,
-                                  focusBorderColor: .black,
-                                  inactiveBorderColor: .lightGray,
-                                  completedBorderColor: .green,
-                                  errorBorderColor: .red,
-                                  returnKeyType: .done)
+                                        allowsBackspace: true,
+                                        showsPlaceholder: true,
+                                        allowsAllCharacters: false,
+                                        focusBorderColor: .black,
+                                        inactiveBorderColor: .lightGray,
+                                        completedBorderColor: .green,
+                                        errorBorderColor: .red,
+                                        returnKeyType: .done)
 ```
 
 2) Once set, you can optionally adjust individual parameters in the state:
