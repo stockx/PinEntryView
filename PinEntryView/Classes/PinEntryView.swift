@@ -34,7 +34,10 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
+    @objc @IBInspectable fileprivate var focusBorderColor: UIColor = .black
+    @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
     @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
+    @objc @IBInspectable fileprivate var errorBorderColor: UIColor = .red
     
     public override var canBecomeFirstResponder: Bool {
         return textField.canBecomeFirstResponder
@@ -91,13 +94,14 @@ public protocol PinEntryViewDelegate: class {
     
     /** 
      Enters into an error state. When editing, colors the currently focussed 
-     box red and leaves the empty boxes to the right light gray. When not 
-     editing, colors all boxes that are not filled out red. The error state 
-     gets cleared as soon as editing begins/ends or when typing occurs. 
+     box state?.errorBorderColor and leaves the empty boxes to the right 
+     state?.inactiveBorderColor. When not editing, colors all boxes that are 
+     not filled out state?.errorBorderColor. The error state gets cleared as
+     soon as editing begins/ends or when typing occurs.
      */
     public func showErrorState() {
-        updateButtonStates(focusBorderColor: .red,
-                           inactiveBorderColor: isFirstResponder ? .lightGray : .red)
+        updateButtonStates(overrideFocusBorderColor: state?.errorBorderColor,
+                           overrideInactiveBorderColor: isFirstResponder == false ? state?.errorBorderColor : nil)
     }
 }
 
@@ -109,20 +113,29 @@ public extension PinEntryView {
         public var allowsBackspace: Bool
         public var showsPlaceholder: Bool
         public var allowsAllCharacters: Bool
+        public var focusBorderColor: UIColor
+        public var inactiveBorderColor: UIColor
         public var completedBorderColor: UIColor
+        public var errorBorderColor: UIColor
         public var returnKeyType: UIReturnKeyType
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
                     showsPlaceholder: Bool = true,
                     allowsAllCharacters: Bool = true,
+                    focusBorderColor: UIColor = .black,
+                    inactiveBorderColor: UIColor = .lightGray,
                     completedBorderColor: UIColor = .green,
+                    errorBorderColor: UIColor = .red,
                     returnKeyType: UIReturnKeyType) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsPlaceholder = showsPlaceholder
             self.allowsAllCharacters = allowsAllCharacters
+            self.focusBorderColor = focusBorderColor
+            self.inactiveBorderColor = inactiveBorderColor
             self.completedBorderColor = completedBorderColor
+            self.errorBorderColor = errorBorderColor
             self.returnKeyType = returnKeyType
         }
     }
@@ -134,10 +147,11 @@ public extension PinEntryView {
             textField.text = nil
             createNewButtons()
         }
-        else if oldValue?.showsPlaceholder != state?.showsPlaceholder {
-            updateButtonStates()
-        }
-        else if oldValue?.completedBorderColor != state?.completedBorderColor {
+        else if oldValue?.showsPlaceholder != state?.showsPlaceholder ||
+            oldValue?.focusBorderColor != state?.focusBorderColor ||
+            oldValue?.inactiveBorderColor != state?.inactiveBorderColor ||
+            oldValue?.completedBorderColor != state?.completedBorderColor ||
+            oldValue?.errorBorderColor != state?.errorBorderColor {
             updateButtonStates()
         }
     }
@@ -228,7 +242,10 @@ fileprivate extension PinEntryView {
                       allowsBackspace: allowsBackspace,
                       showsPlaceholder: showsPlaceholder,
                       allowsAllCharacters: allowsAllCharacters,
+                      focusBorderColor: focusBorderColor,
+                      inactiveBorderColor: inactiveBorderColor,
                       completedBorderColor: completedBorderColor,
+                      errorBorderColor: errorBorderColor,
                       returnKeyType: .done)
         
         backgroundColor = .clear
@@ -323,7 +340,7 @@ fileprivate extension PinEntryView {
         becomeFirstResponder()
     }
     
-    func updateButtonStates(focusBorderColor: UIColor = .black, inactiveBorderColor: UIColor = .lightGray) {
+    func updateButtonStates(overrideFocusBorderColor: UIColor? = nil, overrideInactiveBorderColor: UIColor? = nil) {
         let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
@@ -331,7 +348,7 @@ fileprivate extension PinEntryView {
                 newCharacter != "" {
                 button.setTitle(newCharacter, for: .normal)
                 button.setTitleColor(.black, for: .normal)
-                button.layer.borderColor = (state?.completedBorderColor ?? .lightGray).cgColor
+                button.layer.borderColor = state?.completedBorderColor.cgColor
             }
             else {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
@@ -339,10 +356,10 @@ fileprivate extension PinEntryView {
                 
                 let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
-                    button.layer.borderColor = focusBorderColor.cgColor
+                    button.layer.borderColor = (overrideFocusBorderColor ?? state?.focusBorderColor)?.cgColor
                 }
                 else {
-                    button.layer.borderColor = inactiveBorderColor.cgColor
+                    button.layer.borderColor = (overrideInactiveBorderColor ?? state?.inactiveBorderColor)?.cgColor
                 }
             }
         }
