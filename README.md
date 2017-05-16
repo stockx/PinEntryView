@@ -75,17 +75,21 @@ If you prefer not to use CocoaPods, you can integrate `PinEntryView` into your p
 ```swift
 var pinEntryView = PinEntryView()
 pinEntryView.state = PinEntryView.State(pin: "ACCEPT",
-                                        allowsBackspace: true,
-                                        showsPlaceholder: true,
-                                        allowsAllCharacters: false,
-                                        completedBorderColor: .green)
+                                  allowsBackspace: true,
+                                  showsPlaceholder: true,
+                                  allowsAllCharacters: false,
+                                  focusBorderColor: .black,
+                                  inactiveBorderColor: .lightGray,
+                                  completedBorderColor: .green,
+                                  errorBorderColor: .red,
+                                  returnKeyType: .done)
 ```
 
 2) Once set, you can optionally adjust individual parameters in the state:
 
 Reassigning one var can be done in line:
 ```swift
-pinEntryView.state?.pin = "CONFIRM"
+pinEntryView.state?.returnKeyType = .next
 ```
 
 ***or***
@@ -93,7 +97,7 @@ pinEntryView.state?.pin = "CONFIRM"
 Group up reassigning multiple vars that way only one update (`PinEntryView.update()`) cycle is made:
 ```swift
 var state = pinEntryView.state
-state?.pin = "CONFIRM"
+state?.completedBorderColor = .clear
 state?.showsPlaceholder = false
 pinEntryView.state = state
 ```
