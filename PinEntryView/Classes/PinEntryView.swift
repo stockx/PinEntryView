@@ -352,7 +352,7 @@ fileprivate extension PinEntryView {
             }
             else {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
-                button.setTitleColor(UIColor(white: 0.8, alpha: 1), for: .normal) // lighter gray
+                button.setTitleColor(.lighterGray, for: .normal)
                 
                 let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
