@@ -10,6 +10,6 @@ import UIKit
 
 extension UIColor {
     class var lighterGray: UIColor {
-        return UIColor(white: 0.8, alpha: 1)
+        return UIColor(white: 0.9, alpha: 1)
     }
 }
