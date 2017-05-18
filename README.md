@@ -77,6 +77,7 @@ var pinEntryView = PinEntryView()
 pinEntryView.state = PinEntryView.State(pin: "ACCEPT",
                                         allowsBackspace: true,
                                         showsPlaceholder: true,
+                                        placeholderTextColor: .lightGray,
                                         allowsAllCharacters: false,
                                         focusBorderColor: .black,
                                         inactiveBorderColor: .lightGray,
