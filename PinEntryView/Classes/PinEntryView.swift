@@ -33,6 +33,7 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var pin: String? = "ACCEPT"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
+    @objc @IBInspectable fileprivate var placeholderTextColor: UIColor = .lighterGray
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
     @objc @IBInspectable fileprivate var focusBorderColor: UIColor = .black
     @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
@@ -112,6 +113,7 @@ public extension PinEntryView {
         public var pin: String?
         public var allowsBackspace: Bool
         public var showsPlaceholder: Bool
+        public var placeholderTextColor: UIColor
         public var allowsAllCharacters: Bool
         public var focusBorderColor: UIColor
         public var inactiveBorderColor: UIColor
@@ -122,6 +124,7 @@ public extension PinEntryView {
         public init(pin: String?,
                     allowsBackspace: Bool = true,
                     showsPlaceholder: Bool = true,
+                    placeholderTextColor: UIColor = .lighterGray,
                     allowsAllCharacters: Bool = true,
                     focusBorderColor: UIColor = .black,
                     inactiveBorderColor: UIColor = .lightGray,
@@ -131,6 +134,7 @@ public extension PinEntryView {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsPlaceholder = showsPlaceholder
+            self.placeholderTextColor = placeholderTextColor
             self.allowsAllCharacters = allowsAllCharacters
             self.focusBorderColor = focusBorderColor
             self.inactiveBorderColor = inactiveBorderColor
@@ -148,6 +152,7 @@ public extension PinEntryView {
             createNewButtons()
         }
         else if oldValue?.showsPlaceholder != state?.showsPlaceholder ||
+            oldValue?.placeholderTextColor != state?.placeholderTextColor ||
             oldValue?.focusBorderColor != state?.focusBorderColor ||
             oldValue?.inactiveBorderColor != state?.inactiveBorderColor ||
             oldValue?.completedBorderColor != state?.completedBorderColor ||
@@ -241,6 +246,7 @@ fileprivate extension PinEntryView {
         state = State(pin: pin,
                       allowsBackspace: allowsBackspace,
                       showsPlaceholder: showsPlaceholder,
+                      placeholderTextColor: placeholderTextColor,
                       allowsAllCharacters: allowsAllCharacters,
                       focusBorderColor: focusBorderColor,
                       inactiveBorderColor: inactiveBorderColor,
@@ -352,7 +358,7 @@ fileprivate extension PinEntryView {
             }
             else {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
-                button.setTitleColor(.lighterGray, for: .normal)
+                button.setTitleColor(placeholderTextColor, for: .normal)
                 
                 let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
                 if isFocussed {
