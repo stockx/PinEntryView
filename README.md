@@ -1,6 +1,6 @@
 ![PinEntryView Logo](https://cloud.githubusercontent.com/assets/2835199/25503255/aa050598-2b67-11e7-89f7-b0fbc6da31ba.png)
 
-![Swift3.1](https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat")
+![Swift4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat")
 [![Platform](https://img.shields.io/cocoapods/p/PinEntryView.svg?style=flat)](http://cocoapods.org/pods/PinEntryView)
 [![Version](https://img.shields.io/cocoapods/v/PinEntryView.svg?style=flat)](http://cocoapods.org/pods/PinEntryView)
 [![License](https://img.shields.io/cocoapods/l/PinEntryView.svg?style=flat)](http://cocoapods.org/pods/PinEntryView)
@@ -47,6 +47,8 @@ To integrate `PinEntryView` into your Xcode project using CocoaPods, specify it 
 ```ruby
 pod 'PinEntryView'
 ```
+
+(For Swift 3.1, use `pod 'PinEntryView', '~> 1.0.0'` instead)
 
 Then, run the following command:
 
