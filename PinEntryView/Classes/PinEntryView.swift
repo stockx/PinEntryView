@@ -33,7 +33,7 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var pin: String? = "ACCEPT"
     @objc @IBInspectable fileprivate var allowsBackspace: Bool = false
     @objc @IBInspectable fileprivate var showsPlaceholder: Bool = true
-    @objc @IBInspectable fileprivate var placeholderTextColor: UIColor = .lighterGray
+    @objc @IBInspectable fileprivate var placeholderTextColor = UIColor(white: 0.9, alpha: 1)
     @objc @IBInspectable fileprivate var allowsAllCharacters: Bool = false
     @objc @IBInspectable fileprivate var focusBorderColor: UIColor = .black
     @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
@@ -124,7 +124,7 @@ public extension PinEntryView {
         public init(pin: String?,
                     allowsBackspace: Bool = true,
                     showsPlaceholder: Bool = true,
-                    placeholderTextColor: UIColor = .lighterGray,
+                    placeholderTextColor: UIColor = UIColor(white: 0.9, alpha: 1),
                     allowsAllCharacters: Bool = true,
                     focusBorderColor: UIColor = .black,
                     inactiveBorderColor: UIColor = .lightGray,
