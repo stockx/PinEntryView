@@ -26,7 +26,7 @@ public protocol PinEntryViewDelegate: class {
     public weak var delegate: PinEntryViewDelegate?
     
     fileprivate lazy var textField: UITextField = self.createTextField()
-    fileprivate var buttons = [UIButton]()
+    fileprivate var buttons = [PinButton]()
     fileprivate var buttonInnerSpacerViews = [UIView]()
     
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
@@ -216,6 +216,50 @@ extension PinEntryView: UITextFieldDelegate {
 
 // MARK - Internal
 
+class PinButton: UIButton {
+    let border = UIView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        commonInit()
+    }
+    
+    private func commonInit() {
+        addSubview(border)
+        
+        border.makeAttributesEqualToSuperview([.leading, .trailing, .bottom])
+        border.makeAttribute(.height, equalTo: 2)
+    }
+    
+    struct State {
+        var title: String?
+        var color: UIColor = .black
+    }
+    
+    var viewState = State() {
+        didSet {
+            update()
+        }
+    }
+    
+    private func update() {
+        setTitle(viewState.title, for: .normal)
+        
+        setTitleColor(viewState.color, for: .normal)
+        border.backgroundColor = viewState.color
+    }
+}
+
 fileprivate extension PinEntryView {
     func createTextField() -> UITextField {
         let textField = UITextField()
@@ -227,12 +271,11 @@ fileprivate extension PinEntryView {
         return textField
     }
     
-    func createButton() -> UIButton {
-        let button = UIButton(type: .custom)
+    func createButton() -> PinButton {
+        let button = PinButton(type: .custom)
         button.addTarget(self, action: #selector(openKeyboard), for: .touchUpInside)
         button.backgroundColor = .white
-        button.layer.cornerRadius = 2
-        button.layer.borderWidth = 1
+        
         return button
     }
     
@@ -350,24 +393,28 @@ fileprivate extension PinEntryView {
         let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
+            var buttonState = button.viewState
+            
             if let newCharacter = textField.text?[i],
                 newCharacter != "" {
-                button.setTitle(newCharacter, for: .normal)
-                button.setTitleColor(.black, for: .normal)
-                button.layer.borderColor = state?.completedBorderColor.cgColor
+                
+                buttonState.title = newCharacter
+                buttonState.color = state?.completedBorderColor ?? .black
             }
             else {
-                button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
-                button.setTitleColor(placeholderTextColor, for: .normal)
+                buttonState.title = showsPlaceholder ? state?.pin?.uppercased()[i] : nil
                 
                 let isFocussed = isFirstResponder && i == textField.text?.count ?? 0
+                
                 if isFocussed {
-                    button.layer.borderColor = (overrideFocusBorderColor ?? state?.focusBorderColor)?.cgColor
+                    buttonState.color = overrideFocusBorderColor ?? state?.focusBorderColor ?? .black
                 }
                 else {
-                    button.layer.borderColor = (overrideInactiveBorderColor ?? state?.inactiveBorderColor)?.cgColor
+                    buttonState.color = overrideInactiveBorderColor ?? state?.inactiveBorderColor ?? .black
                 }
             }
+            
+            button.viewState = buttonState
         }
     }
 }
