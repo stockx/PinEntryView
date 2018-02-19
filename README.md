@@ -11,6 +11,7 @@ Description
 `PinEntryView` is a customizable view written in Swift that can be used to confirm alphanumeric pins. Use cases include typing `ACCEPT` after reviewing Terms of Service and setting or confirming a passcode.
 
 <img width="303" alt="screen shot 2017-04-27 at 5 01 21 pm" src="https://cloud.githubusercontent.com/assets/2835199/25504253/2f457ec4-2b6b-11e7-8dce-309c858443cb.png">
+
 <img width="265" alt="screen shot 2018-02-19 at 12 30 50 pm" src="https://user-images.githubusercontent.com/13071936/36396873-26bf6324-158e-11e8-967a-381d935e5fd0.png">
 
 # Contents
@@ -28,7 +29,7 @@ Description
 - [x] Customizable for many different use cases.
 - [x] Example app to demonstrate the various configurations.
 
-![Example Project Screenshot](https://cloud.githubusercontent.com/assets/2835199/25539360/d8ca88be-2c14-11e7-809d-5ef620524d1a.png)
+<img width="515" alt="screen shot 2018-02-19 at 4 23 30 pm" src="https://user-images.githubusercontent.com/13071936/36397635-925f6f54-1591-11e8-82b0-ab15e2643370.png">
 
 <a name="installation"> Installation </a>
 --------------
