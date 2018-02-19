@@ -159,7 +159,8 @@ public extension PinEntryView {
             oldValue?.focusBorderColor != state?.focusBorderColor ||
             oldValue?.inactiveBorderColor != state?.inactiveBorderColor ||
             oldValue?.completedBorderColor != state?.completedBorderColor ||
-            oldValue?.errorBorderColor != state?.errorBorderColor {
+            oldValue?.errorBorderColor != state?.errorBorderColor ||
+            oldValue?.buttonBorderStyle != state?.buttonBorderStyle {
             updateButtonStates()
         }
     }
