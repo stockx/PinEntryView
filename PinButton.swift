@@ -40,6 +40,8 @@ class PinButton: UIButton {
         
         bottomBorder.makeAttribute(.height, equalTo: 2)
         bottomBorder.makeAttributesEqualToSuperview([.leading, .trailing, .bottom])
+        
+        update()
     }
 }
 
