@@ -237,8 +237,10 @@ class PinButton: UIButton {
     private func commonInit() {
         addSubview(border)
         
-        border.makeAttributesEqualToSuperview([.leading, .trailing, .bottom])
         border.makeAttribute(.height, equalTo: 2)
+        border.makeAttributesEqualToSuperview([.bottom])
+        border.makeAttributesEqualToSuperview([.leading, .trailing], offset: 5)
+        border.makeAttributesEqualToSuperview([.trailing], offset: -5)
     }
     
     struct State {
