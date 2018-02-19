@@ -245,7 +245,8 @@ class PinButton: UIButton {
     
     struct State {
         var title: String?
-        var color: UIColor = .black
+        var textColor: UIColor = .black
+        var borderColor: UIColor = .black
     }
     
     var viewState = State() {
@@ -257,8 +258,8 @@ class PinButton: UIButton {
     private func update() {
         setTitle(viewState.title, for: .normal)
         
-        setTitleColor(viewState.color, for: .normal)
-        border.backgroundColor = viewState.color
+        setTitleColor(viewState.textColor, for: .normal)
+        border.backgroundColor = viewState.borderColor
     }
 }
 
@@ -401,18 +402,20 @@ fileprivate extension PinEntryView {
                 newCharacter != "" {
                 
                 buttonState.title = newCharacter
-                buttonState.color = state?.completedBorderColor ?? .black
+                buttonState.textColor = state?.completedBorderColor ?? .black
+                buttonState.borderColor = state?.completedBorderColor ?? .black
             }
             else {
                 buttonState.title = showsPlaceholder ? state?.pin?.uppercased()[i] : nil
+                buttonState.textColor = placeholderTextColor
                 
                 let isFocussed = isFirstResponder && i == textField.text?.count ?? 0
                 
                 if isFocussed {
-                    buttonState.color = overrideFocusBorderColor ?? state?.focusBorderColor ?? .black
+                    buttonState.borderColor = overrideFocusBorderColor ?? state?.focusBorderColor ?? .black
                 }
                 else {
-                    buttonState.color = overrideInactiveBorderColor ?? state?.inactiveBorderColor ?? .black
+                    buttonState.borderColor = overrideInactiveBorderColor ?? state?.inactiveBorderColor ?? .black
                 }
             }
             
