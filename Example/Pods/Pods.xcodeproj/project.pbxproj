@@ -16,7 +16,7 @@
 		9614CD0BE3AE99C39919FF98A066B641 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		9E552945E374681869F3CBA8162D8AEC /* PinEntryView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE5A5426C245B3F1103617F0C2F27A /* PinEntryView-dummy.m */; };
 		E7FAD3A18137EF646F686E853C5BFEFF /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99A29948DD5759E01CE55404BC2C263 /* UIView+Autolayout.swift */; };
-		F62D9CDE203B5A88003BC725 /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62D9CDD203B5A88003BC725 /* PinButton.swift */; };
+		F6A45218203B658600969FE4 /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A45217203B658500969FE4 /* PinButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,7 @@
 		CBCDB1392C6F2C3BBE6B40A4F1DF276A /* Pods-PinEntryView_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PinEntryView_Example-resources.sh"; sourceTree = "<group>"; };
 		E99A29948DD5759E01CE55404BC2C263 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Autolayout.swift"; path = "PinEntryView/Classes/UIView+Autolayout.swift"; sourceTree = "<group>"; };
 		F202A41EE9609164A5C7676C96FD313D /* Pods-PinEntryView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PinEntryView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F62D9CDD203B5A88003BC725 /* PinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinButton.swift; sourceTree = "<group>"; };
+		F6A45217203B658500969FE4 /* PinButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinButton.swift; path = PinEntryView/Classes/PinButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +116,7 @@
 		A3723DD0DA80E857D2B329E7A9BB016A /* PinEntryView */ = {
 			isa = PBXGroup;
 			children = (
-				F62D9CDD203B5A88003BC725 /* PinButton.swift */,
+				F6A45217203B658500969FE4 /* PinButton.swift */,
 				3CCFFF7D35BD7E6FBE24FA2C30B78E2B /* PinEntryView.swift */,
 				9F8861CA74C991B1351AB401A6BDF8FE /* String+Access.swift */,
 				E99A29948DD5759E01CE55404BC2C263 /* UIView+Autolayout.swift */,
@@ -262,7 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F62D9CDE203B5A88003BC725 /* PinButton.swift in Sources */,
+				F6A45218203B658600969FE4 /* PinButton.swift in Sources */,
 				9E552945E374681869F3CBA8162D8AEC /* PinEntryView-dummy.m in Sources */,
 				78FB1A56A4C797CCC209E4677D27A0ED /* PinEntryView.swift in Sources */,
 				7D3AFA91A0377644516BD31DE10785FC /* String+Access.swift in Sources */,
