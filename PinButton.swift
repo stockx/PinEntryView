@@ -47,6 +47,7 @@ class PinButton: UIButton {
 
 extension PinButton {
     struct State {
+        var borderStyle: BorderStyle = .full
         var title: String?
         var textColor: UIColor = .black
         var borderColor: UIColor = .black
