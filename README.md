@@ -11,6 +11,7 @@ Description
 `PinEntryView` is a customizable view written in Swift that can be used to confirm alphanumeric pins. Use cases include typing `ACCEPT` after reviewing Terms of Service and setting or confirming a passcode.
 
 <img width="303" alt="screen shot 2017-04-27 at 5 01 21 pm" src="https://cloud.githubusercontent.com/assets/2835199/25504253/2f457ec4-2b6b-11e7-8dce-309c858443cb.png">
+<img width="265" alt="screen shot 2018-02-19 at 12 30 50 pm" src="https://user-images.githubusercontent.com/13071936/36396873-26bf6324-158e-11e8-967a-381d935e5fd0.png">
 
 # Contents
 1. [Features](#features)
@@ -85,7 +86,8 @@ pinEntryView.state = PinEntryView.State(pin: "ACCEPT",
                                         inactiveBorderColor: .lightGray,
                                         completedBorderColor: .green,
                                         errorBorderColor: .red,
-                                        returnKeyType: .done)
+                                        returnKeyType: .done,
+                                        buttonBorderStyle: .bottom)
 ```
 
 2) Once set, you can optionally adjust individual parameters in the state:
