@@ -60,7 +60,11 @@ extension PinButton {
         }
     }
 
-    private func update() {
+    private func update(_ oldState: State? = nil) {
+        guard viewState != oldState else {
+            return
+        }
+        
         setTitle(viewState.title, for: .normal)
         
         setTitleColor(viewState.textColor, for: .normal)
