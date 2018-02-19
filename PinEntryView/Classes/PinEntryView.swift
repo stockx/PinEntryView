@@ -39,7 +39,6 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
     @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
     @objc @IBInspectable fileprivate var errorBorderColor: UIColor = .red
-    @objc @IBInspectable fileprivate var buttonBorderStyle: PinButton.BorderStyle = .full
     
     public override var canBecomeFirstResponder: Bool {
         return textField.canBecomeFirstResponder
@@ -121,6 +120,7 @@ public extension PinEntryView {
         public var completedBorderColor: UIColor
         public var errorBorderColor: UIColor
         public var returnKeyType: UIReturnKeyType
+        public var buttonBorderStyle: PinButton.BorderStyle
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
@@ -131,7 +131,8 @@ public extension PinEntryView {
                     inactiveBorderColor: UIColor = .lightGray,
                     completedBorderColor: UIColor = .green,
                     errorBorderColor: UIColor = .red,
-                    returnKeyType: UIReturnKeyType) {
+                    returnKeyType: UIReturnKeyType,
+                    buttonBorderStyle: PinButton.BorderStyle = .full) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsPlaceholder = showsPlaceholder
@@ -142,6 +143,7 @@ public extension PinEntryView {
             self.completedBorderColor = completedBorderColor
             self.errorBorderColor = errorBorderColor
             self.returnKeyType = returnKeyType
+            self.buttonBorderStyle = buttonBorderStyle
         }
     }
     
@@ -351,6 +353,7 @@ fileprivate extension PinEntryView {
         
         for (i, button) in buttons.enumerated() {
             var buttonState = button.viewState
+            buttonState.borderStyle = state?.buttonBorderStyle ?? .full
             
             if let newCharacter = textField.text?[i],
                 newCharacter != "" {

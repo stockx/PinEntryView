@@ -5,7 +5,7 @@
 //  Created by Laurent Shala on 2/19/18.
 //
 
-class PinButton: UIButton {
+public class PinButton: UIButton {
     // MARK: - UI Elements
     
     private let bottomBorder = UIView()
@@ -25,12 +25,12 @@ class PinButton: UIButton {
         commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
     
-    override func prepareForInterfaceBuilder() {
+    override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         commonInit()
     }
@@ -76,14 +76,14 @@ extension PinButton {
         
         layer.cornerRadius = viewState.borderStyle == .full ? 2 : 0
         layer.borderWidth = viewState.borderStyle == .full ? 1 : 0
-        layer.borderColor = viewState.borderColor.cgColor
+        layer.borderColor = viewState.borderStyle == .full ? viewState.borderColor.cgColor : nil
     }
 }
 
 // MARK: - BorderStyle
 
 extension PinButton {
-    @objc enum BorderStyle: Int {
+    @objc public enum BorderStyle: Int {
         
         /** a thin border around the entire button */
         case full
