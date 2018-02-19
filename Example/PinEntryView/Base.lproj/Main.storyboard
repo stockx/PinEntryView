@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GiV-RY-xez">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GiV-RY-xez">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -105,25 +105,38 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgQ-cX-9hj">
-                                <rect key="frame" x="30" y="431" width="315" height="30"/>
+                                <rect key="frame" x="30" y="472" width="315" height="30"/>
                                 <state key="normal" title="Show Error State"/>
                                 <connections>
                                     <action selector="didTapShowErrorStateButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="T9x-Y2-7zF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOP-Np-ecu">
-                                <rect key="frame" x="30" y="471" width="315" height="30"/>
+                                <rect key="frame" x="30" y="512" width="315" height="30"/>
                                 <state key="normal" title="Fill In Pin"/>
                                 <connections>
                                     <action selector="didTapFillinPinButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n3p-AW-tBo"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Full Border Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUM-lo-eRe">
+                                <rect key="frame" x="30" y="431" width="160" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0mI-BK-LvN">
+                                <rect key="frame" x="296" y="426" width="51" height="31"/>
+                                <connections>
+                                    <action selector="didTapSwitch:" destination="vXZ-lx-hvc" eventType="valueChanged" id="X2Z-Ax-iWr"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.94116239536557977" green="0.93661571712709879" blue="0.94570907360406087" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="oyb-SU-jPO" firstAttribute="leading" secondItem="euB-QP-4a7" secondAttribute="trailing" constant="10" id="1K7-2H-ePv"/>
                             <constraint firstItem="aKk-qd-Ea1" firstAttribute="centerY" secondItem="JX6-bh-5FL" secondAttribute="centerY" id="4y2-eO-iMw"/>
                             <constraint firstItem="oyb-SU-jPO" firstAttribute="centerY" secondItem="euB-QP-4a7" secondAttribute="centerY" id="7KR-uT-G3b"/>
+                            <constraint firstItem="jgQ-cX-9hj" firstAttribute="top" secondItem="QUM-lo-eRe" secondAttribute="bottom" constant="20" id="8Rs-mf-KH1"/>
                             <constraint firstItem="AOP-Np-ecu" firstAttribute="leading" secondItem="1sz-zL-sfA" secondAttribute="leading" id="9xs-7f-WCy"/>
                             <constraint firstItem="Nya-dW-cg3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="15" id="BqP-VQ-hhu"/>
                             <constraint firstItem="AOP-Np-ecu" firstAttribute="top" secondItem="jgQ-cX-9hj" secondAttribute="bottom" constant="10" id="CDt-CC-2hA"/>
@@ -131,6 +144,8 @@
                             <constraint firstItem="UYA-hX-gxo" firstAttribute="top" secondItem="1sz-zL-sfA" secondAttribute="bottom" constant="20" id="GM2-8g-R4e"/>
                             <constraint firstItem="JX6-bh-5FL" firstAttribute="leading" secondItem="1sz-zL-sfA" secondAttribute="leading" id="GNo-SL-jZo"/>
                             <constraint firstItem="oyb-SU-jPO" firstAttribute="top" secondItem="s8E-R1-Cmy" secondAttribute="bottom" constant="20" id="K1w-ri-xqN"/>
+                            <constraint firstItem="QUM-lo-eRe" firstAttribute="top" secondItem="mXX-bH-3xm" secondAttribute="bottom" constant="20" id="K4w-SX-jH9"/>
+                            <constraint firstItem="QUM-lo-eRe" firstAttribute="leading" secondItem="1sz-zL-sfA" secondAttribute="leading" id="NQb-cm-jr2"/>
                             <constraint firstItem="1sz-zL-sfA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="NUk-d0-9EH"/>
                             <constraint firstItem="AOP-Np-ecu" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="PsR-YI-4hZ"/>
                             <constraint firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" constant="30" id="QJQ-dY-aHs"/>
@@ -141,11 +156,12 @@
                             <constraint firstAttribute="trailing" secondItem="Nya-dW-cg3" secondAttribute="trailing" constant="15" id="Trd-7B-F0p"/>
                             <constraint firstItem="OFr-vP-rY6" firstAttribute="centerY" secondItem="mXX-bH-3xm" secondAttribute="centerY" id="UDO-ja-cqy"/>
                             <constraint firstItem="Tum-OA-nKb" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="VGV-IX-lDZ"/>
+                            <constraint firstItem="0mI-BK-LvN" firstAttribute="centerY" secondItem="QUM-lo-eRe" secondAttribute="centerY" id="Zbn-31-88t"/>
                             <constraint firstItem="eQB-ds-5hs" firstAttribute="leading" secondItem="1sz-zL-sfA" secondAttribute="leading" id="c1j-Uy-vVY"/>
                             <constraint firstItem="UYA-hX-gxo" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="eL7-w2-jlI"/>
-                            <constraint firstItem="jgQ-cX-9hj" firstAttribute="top" secondItem="mXX-bH-3xm" secondAttribute="bottom" constant="20" id="fSk-mC-kJq"/>
                             <constraint firstItem="JX6-bh-5FL" firstAttribute="top" secondItem="euB-QP-4a7" secondAttribute="bottom" constant="20" id="gpI-Uv-azq"/>
                             <constraint firstItem="s8E-R1-Cmy" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="iKQ-4Y-WZ4"/>
+                            <constraint firstItem="0mI-BK-LvN" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="kP2-4p-npA"/>
                             <constraint firstItem="OFr-vP-rY6" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="kjU-BO-1Ce"/>
                             <constraint firstItem="jgQ-cX-9hj" firstAttribute="trailing" secondItem="1sz-zL-sfA" secondAttribute="trailing" id="nvF-3z-n3d"/>
                             <constraint firstItem="Nya-dW-cg3" firstAttribute="top" secondItem="UYA-hX-gxo" secondAttribute="bottom" constant="20" id="oFc-vk-QSs"/>
@@ -159,11 +175,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="PinEntryView" id="ay6-Os-0VY"/>
                     <connections>
-                        <outlet property="allowsAllCharactersSwitch" destination="OFr-vP-rY6" id="r10-Vo-FTG"/>
+                        <outlet property="allowsAllCharactersSwitch" destination="OFr-vP-rY6" id="3cP-IQ-AH6"/>
                         <outlet property="allowsBackspaceSwitch" destination="aKk-qd-Ea1" id="7jQ-3r-uZf"/>
                         <outlet property="pinEntryView" destination="UYA-hX-gxo" id="zQ2-dD-jtq"/>
                         <outlet property="pinTextField" destination="oyb-SU-jPO" id="4We-ZF-t9h"/>
                         <outlet property="showsPlaceholderSwitch" destination="Tum-OA-nKb" id="uhR-DT-14O"/>
+                        <outlet property="useFullBorderSyleSwitch" destination="0mI-BK-LvN" id="Oxx-OQ-Rtj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -175,7 +192,7 @@
             <objects>
                 <navigationController id="GiV-RY-xez" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gmH-O3-pxE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
