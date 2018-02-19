@@ -70,7 +70,13 @@ extension PinButton {
         setTitle(viewState.title, for: .normal)
         
         setTitleColor(viewState.textColor, for: .normal)
+        
         bottomBorder.backgroundColor = viewState.borderColor
+        bottomBorder.isHidden = viewState.borderStyle == .full
+        
+        layer.cornerRadius = viewState.borderStyle == .full ? 2 : 0
+        layer.borderWidth = viewState.borderStyle == .full ? 1 : 0
+        layer.borderColor = viewState.borderColor.cgColor
     }
 }
 
