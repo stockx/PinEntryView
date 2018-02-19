@@ -171,18 +171,18 @@ extension PinEntryView: UITextFieldDelegate {
         let newText = (oldText as NSString).replacingCharacters(in: range, with: string).uppercased()
         
         // Don't allow user to keep typing once all buttons are filled
-        guard newText.characters.count <= state?.pin?.characters.count ?? 0 else {
+        guard newText.count <= state?.pin?.count ?? 0 else {
             delegate?.pinEntryViewDidTapKeyboardReturnKey(self)
             return false
         }
         
         // Disallow backspace if necessary
-        guard state?.allowsBackspace == true || newText.characters.count > oldText.characters.count else {
+        guard state?.allowsBackspace == true || newText.count > oldText.count else {
             return false
         }
         
         // Disallow entering non-matching characters if necessary
-        guard state?.allowsAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.characters.count) else {
+        guard state?.allowsAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.count) else {
             showErrorState()
             return false
         }
@@ -191,7 +191,7 @@ extension PinEntryView: UITextFieldDelegate {
         updateButtonStates()
         
         // The last letter is typed, which means we're all done
-        if newText.characters.count == state?.pin?.characters.count ?? 0 {
+        if newText.count == state?.pin?.count ?? 0 {
             delegate?.pinEntryView(self, didFinishEditing: newText)
         }
         
@@ -268,7 +268,7 @@ fileprivate extension PinEntryView {
         }
         buttons.removeAll()
         
-        state?.pin?.characters.forEach { _ in
+        state?.pin?.forEach { _ in
             let button = createButton()
             buttons.append(button)
             addSubview(button)
@@ -360,7 +360,7 @@ fileprivate extension PinEntryView {
                 button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
                 button.setTitleColor(placeholderTextColor, for: .normal)
                 
-                let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
+                let isFocussed = isFirstResponder && i == textField.text?.count ?? 0
                 if isFocussed {
                     button.layer.borderColor = (overrideFocusBorderColor ?? state?.focusBorderColor)?.cgColor
                 }
