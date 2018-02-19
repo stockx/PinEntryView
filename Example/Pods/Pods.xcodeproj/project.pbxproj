@@ -116,11 +116,11 @@
 		A3723DD0DA80E857D2B329E7A9BB016A /* PinEntryView */ = {
 			isa = PBXGroup;
 			children = (
+				F62D9CDD203B5A88003BC725 /* PinButton.swift */,
 				3CCFFF7D35BD7E6FBE24FA2C30B78E2B /* PinEntryView.swift */,
 				9F8861CA74C991B1351AB401A6BDF8FE /* String+Access.swift */,
 				E99A29948DD5759E01CE55404BC2C263 /* UIView+Autolayout.swift */,
 				D6AE1C201AB186634053B32ACFA826F2 /* Support Files */,
-				F62D9CDD203B5A88003BC725 /* PinButton.swift */,
 			);
 			name = PinEntryView;
 			path = ../..;
