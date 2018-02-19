@@ -39,6 +39,7 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
     @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
     @objc @IBInspectable fileprivate var errorBorderColor: UIColor = .red
+    @objc @IBInspectable fileprivate var buttonBorderStyle: PinButton.BorderStyle = .full
     
     public override var canBecomeFirstResponder: Bool {
         return textField.canBecomeFirstResponder

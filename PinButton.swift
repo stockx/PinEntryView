@@ -83,7 +83,7 @@ extension PinButton {
 // MARK: - BorderStyle
 
 extension PinButton {
-    enum BorderStyle {
+    @objc enum BorderStyle: Int {
         
         /** a thin border around the entire button */
         case full
