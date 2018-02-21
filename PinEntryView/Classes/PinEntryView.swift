@@ -26,7 +26,7 @@ public protocol PinEntryViewDelegate: class {
     public weak var delegate: PinEntryViewDelegate?
     
     fileprivate lazy var textField: UITextField = self.createTextField()
-    fileprivate var buttons = [UIButton]()
+    fileprivate var buttons = [PinButton]()
     fileprivate var buttonInnerSpacerViews = [UIView]()
     
     // Defaults that can be set inside IB. Use 'state' when setting values in code.
@@ -39,7 +39,8 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
     @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
     @objc @IBInspectable fileprivate var errorBorderColor: UIColor = .red
-    
+    @objc @IBInspectable fileprivate var buttonBorderStyle: Int = PinButton.BorderStyle.full.rawValue
+
     public override var canBecomeFirstResponder: Bool {
         return textField.canBecomeFirstResponder
     }
@@ -120,6 +121,7 @@ public extension PinEntryView {
         public var completedBorderColor: UIColor
         public var errorBorderColor: UIColor
         public var returnKeyType: UIReturnKeyType
+        public var buttonBorderStyle: PinButton.BorderStyle
         
         public init(pin: String?,
                     allowsBackspace: Bool = true,
@@ -130,7 +132,8 @@ public extension PinEntryView {
                     inactiveBorderColor: UIColor = .lightGray,
                     completedBorderColor: UIColor = .green,
                     errorBorderColor: UIColor = .red,
-                    returnKeyType: UIReturnKeyType) {
+                    returnKeyType: UIReturnKeyType = .done,
+                    buttonBorderStyle: PinButton.BorderStyle = .full) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
             self.showsPlaceholder = showsPlaceholder
@@ -141,6 +144,7 @@ public extension PinEntryView {
             self.completedBorderColor = completedBorderColor
             self.errorBorderColor = errorBorderColor
             self.returnKeyType = returnKeyType
+            self.buttonBorderStyle = buttonBorderStyle
         }
     }
     
@@ -156,7 +160,8 @@ public extension PinEntryView {
             oldValue?.focusBorderColor != state?.focusBorderColor ||
             oldValue?.inactiveBorderColor != state?.inactiveBorderColor ||
             oldValue?.completedBorderColor != state?.completedBorderColor ||
-            oldValue?.errorBorderColor != state?.errorBorderColor {
+            oldValue?.errorBorderColor != state?.errorBorderColor ||
+            oldValue?.buttonBorderStyle != state?.buttonBorderStyle {
             updateButtonStates()
         }
     }
@@ -171,18 +176,18 @@ extension PinEntryView: UITextFieldDelegate {
         let newText = (oldText as NSString).replacingCharacters(in: range, with: string).uppercased()
         
         // Don't allow user to keep typing once all buttons are filled
-        guard newText.characters.count <= state?.pin?.characters.count ?? 0 else {
+        guard newText.count <= state?.pin?.count ?? 0 else {
             delegate?.pinEntryViewDidTapKeyboardReturnKey(self)
             return false
         }
         
         // Disallow backspace if necessary
-        guard state?.allowsBackspace == true || newText.characters.count > oldText.characters.count else {
+        guard state?.allowsBackspace == true || newText.count > oldText.count else {
             return false
         }
         
         // Disallow entering non-matching characters if necessary
-        guard state?.allowsAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.characters.count) else {
+        guard state?.allowsAllCharacters == true || newText == (state?.pin ?? "").uppercased().substring(to: newText.count) else {
             showErrorState()
             return false
         }
@@ -191,7 +196,7 @@ extension PinEntryView: UITextFieldDelegate {
         updateButtonStates()
         
         // The last letter is typed, which means we're all done
-        if newText.characters.count == state?.pin?.characters.count ?? 0 {
+        if newText.count == state?.pin?.count ?? 0 {
             delegate?.pinEntryView(self, didFinishEditing: newText)
         }
         
@@ -227,12 +232,11 @@ fileprivate extension PinEntryView {
         return textField
     }
     
-    func createButton() -> UIButton {
-        let button = UIButton(type: .custom)
+    func createButton() -> PinButton {
+        let button = PinButton(type: .custom)
         button.addTarget(self, action: #selector(openKeyboard), for: .touchUpInside)
         button.backgroundColor = .white
-        button.layer.cornerRadius = 2
-        button.layer.borderWidth = 1
+        
         return button
     }
     
@@ -252,7 +256,8 @@ fileprivate extension PinEntryView {
                       inactiveBorderColor: inactiveBorderColor,
                       completedBorderColor: completedBorderColor,
                       errorBorderColor: errorBorderColor,
-                      returnKeyType: .done)
+                      returnKeyType: .done,
+                      buttonBorderStyle: PinButton.BorderStyle(rawValue: buttonBorderStyle) ?? .full)
         
         backgroundColor = .clear
         
@@ -268,7 +273,7 @@ fileprivate extension PinEntryView {
         }
         buttons.removeAll()
         
-        state?.pin?.characters.forEach { _ in
+        state?.pin?.forEach { _ in
             let button = createButton()
             buttons.append(button)
             addSubview(button)
@@ -350,24 +355,31 @@ fileprivate extension PinEntryView {
         let showsPlaceholder = state?.showsPlaceholder == true
         
         for (i, button) in buttons.enumerated() {
+            var buttonState = button.viewState
+            buttonState.borderStyle = state?.buttonBorderStyle ?? .full
+            
             if let newCharacter = textField.text?[i],
                 newCharacter != "" {
-                button.setTitle(newCharacter, for: .normal)
-                button.setTitleColor(.black, for: .normal)
-                button.layer.borderColor = state?.completedBorderColor.cgColor
+                
+                buttonState.title = newCharacter
+                buttonState.textColor = .black
+                buttonState.borderColor = state?.completedBorderColor ?? .black
             }
             else {
-                button.setTitle(showsPlaceholder ? state?.pin?.uppercased()[i] : nil, for: .normal)
-                button.setTitleColor(placeholderTextColor, for: .normal)
+                buttonState.title = showsPlaceholder ? state?.pin?.uppercased()[i] : nil
+                buttonState.textColor = placeholderTextColor
                 
-                let isFocussed = isFirstResponder && i == textField.text?.characters.count ?? 0
+                let isFocussed = isFirstResponder && i == textField.text?.count ?? 0
+                
                 if isFocussed {
-                    button.layer.borderColor = (overrideFocusBorderColor ?? state?.focusBorderColor)?.cgColor
+                    buttonState.borderColor = overrideFocusBorderColor ?? state?.focusBorderColor ?? .black
                 }
                 else {
-                    button.layer.borderColor = (overrideInactiveBorderColor ?? state?.inactiveBorderColor)?.cgColor
+                    buttonState.borderColor = overrideInactiveBorderColor ?? state?.inactiveBorderColor ?? .black
                 }
             }
+            
+            button.viewState = buttonState
         }
     }
 }

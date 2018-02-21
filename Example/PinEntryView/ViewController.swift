@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet fileprivate weak var allowsBackspaceSwitch: UISwitch!
     @IBOutlet fileprivate weak var showsPlaceholderSwitch: UISwitch!
     @IBOutlet fileprivate weak var allowsAllCharactersSwitch: UISwitch!
-
+    @IBOutlet fileprivate weak var useFullBorderSyleSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +35,7 @@ class ViewController: UIViewController {
         allowsBackspaceSwitch.isOn = state?.allowsBackspace == true
         showsPlaceholderSwitch.isOn = state?.showsPlaceholder == true
         allowsAllCharactersSwitch.isOn = state?.allowsAllCharacters == true
+        useFullBorderSyleSwitch.isOn = state?.buttonBorderStyle == .full
     }
     
     @IBAction func didTapSwitch(_ sender: UISwitch) {
@@ -45,6 +47,7 @@ class ViewController: UIViewController {
         state?.allowsBackspace = allowsBackspaceSwitch.isOn
         state?.showsPlaceholder = showsPlaceholderSwitch.isOn
         state?.allowsAllCharacters = allowsAllCharactersSwitch.isOn
+        state?.buttonBorderStyle = useFullBorderSyleSwitch.isOn ? .full : .bottom
         pinEntryView.state = state
     }
     
