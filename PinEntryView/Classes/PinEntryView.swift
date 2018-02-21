@@ -39,7 +39,8 @@ public protocol PinEntryViewDelegate: class {
     @objc @IBInspectable fileprivate var inactiveBorderColor: UIColor = .lightGray
     @objc @IBInspectable fileprivate var completedBorderColor: UIColor = .green
     @objc @IBInspectable fileprivate var errorBorderColor: UIColor = .red
-    
+    @objc @IBInspectable fileprivate var buttonBorderStyle: Int = PinButton.BorderStyle.full.rawValue
+
     public override var canBecomeFirstResponder: Bool {
         return textField.canBecomeFirstResponder
     }
@@ -131,7 +132,7 @@ public extension PinEntryView {
                     inactiveBorderColor: UIColor = .lightGray,
                     completedBorderColor: UIColor = .green,
                     errorBorderColor: UIColor = .red,
-                    returnKeyType: UIReturnKeyType,
+                    returnKeyType: UIReturnKeyType = .done,
                     buttonBorderStyle: PinButton.BorderStyle = .full) {
             self.pin = pin
             self.allowsBackspace = allowsBackspace
@@ -255,7 +256,8 @@ fileprivate extension PinEntryView {
                       inactiveBorderColor: inactiveBorderColor,
                       completedBorderColor: completedBorderColor,
                       errorBorderColor: errorBorderColor,
-                      returnKeyType: .done)
+                      returnKeyType: .done,
+                      buttonBorderStyle: PinButton.BorderStyle(rawValue: buttonBorderStyle) ?? .full)
         
         backgroundColor = .clear
         
