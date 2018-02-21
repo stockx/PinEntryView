@@ -360,7 +360,7 @@ fileprivate extension PinEntryView {
                 newCharacter != "" {
                 
                 buttonState.title = newCharacter
-                buttonState.textColor = state?.completedBorderColor ?? .black
+                buttonState.textColor = .black
                 buttonState.borderColor = state?.completedBorderColor ?? .black
             }
             else {
