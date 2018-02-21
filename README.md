@@ -86,7 +86,7 @@ pinEntryView.state = PinEntryView.State(pin: "ACCEPT",
                                         completedBorderColor: .green,
                                         errorBorderColor: .red,
                                         returnKeyType: .done,
-                                        buttonBorderStyle: .bottom)
+                                        buttonBorderStyle: .full)
 ```
 
 2) Once set, you can optionally adjust individual parameters in the state:
