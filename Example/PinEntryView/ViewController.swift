@@ -61,6 +61,10 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: PinEntryViewDelegate {
+    func pinEntryViewDidBeginEditing(_ view: PinEntryView) {
+        // Perform any custom action when editing starts
+    }
+    
     func pinEntryView(_ view: PinEntryView, didFinishEditing pin: String) {
         print("User finished editing PIN: \(pin)")
         view.resignFirstResponder()
