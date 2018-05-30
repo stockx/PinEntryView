@@ -14,6 +14,12 @@ public protocol PinEntryViewDelegate: class {
     
     /** Called when the user taps the return key on the keyboard. */
     func pinEntryViewDidTapKeyboardReturnKey(_ view: PinEntryView)
+    
+    /** Called when the user begins editing the PinEntryView */
+    func pinEntryViewDidBeginEditing(_ view: PinEntryView)
+    
+    /** Called when the user ends editing the PinEntryView */
+    func pinEntryViewDidEndEditing(_ view: PinEntryView)
 }
 
 @IBDesignable public class PinEntryView: UIView {
@@ -211,11 +217,13 @@ extension PinEntryView: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         // Set the focussed state
         updateButtonStates()
+        delegate?.pinEntryViewDidBeginEditing(self)
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         // Remove any focussed state
         updateButtonStates()
+        delegate?.pinEntryViewDidEndEditing(self)
     }
 }
 
