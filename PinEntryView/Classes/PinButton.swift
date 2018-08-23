@@ -53,13 +53,6 @@ extension PinButton {
         var title: String?
         var textColor: UIColor = .black
         var borderColor: UIColor = .black
-        
-        static func ==(lhs: PinButton.ViewState, rhs: PinButton.ViewState) -> Bool {
-            return lhs.borderStyle == rhs.borderStyle &&
-                lhs.title == rhs.title &&
-                lhs.textColor == rhs.textColor &&
-                lhs.borderColor == rhs.borderColor
-        }
     }
 
     private func update(_ oldState: ViewState? = nil) {
