@@ -12,7 +12,7 @@ public class PinButton: UIButton {
     
     // MARK: - Instance Members
     
-    var viewState = State() {
+    var viewState = ViewState() {
         didSet {
             update(oldValue)
         }
@@ -48,21 +48,14 @@ public class PinButton: UIButton {
 // MARK: - State and Update
 
 extension PinButton {
-    struct State: Equatable {
+    struct ViewState: Equatable {
         var borderStyle: BorderStyle = .full
         var title: String?
         var textColor: UIColor = .black
         var borderColor: UIColor = .black
-        
-        static func ==(lhs: PinButton.State, rhs: PinButton.State) -> Bool {
-            return lhs.borderStyle == rhs.borderStyle &&
-                lhs.title == rhs.title &&
-                lhs.textColor == rhs.textColor &&
-                lhs.borderColor == rhs.borderColor
-        }
     }
 
-    private func update(_ oldState: State? = nil) {
+    private func update(_ oldState: ViewState? = nil) {
         guard viewState != oldState else {
             return
         }
