@@ -116,7 +116,7 @@ public protocol PinEntryViewDelegate: class {
 //  MARK - State
 
 public extension PinEntryView {
-    public struct State {
+    struct State {
         public var pin: String?
         public var allowsBackspace: Bool
         public var showsPlaceholder: Bool
