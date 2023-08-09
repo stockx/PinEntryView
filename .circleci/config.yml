@@ -1,0 +1,20 @@
+workflows:
+  auto-reconciler-adjuster:
+    jobs:
+      - stockx/reconciler-adjuster:
+          context:
+            - auto-reconciler
+  auto-reconciler-migrations:
+    triggers:
+      - schedule:
+          cron: 0 15 * * 1-5
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - stockx/reconciler-migrations:
+          context:
+            - auto-reconciler
+orbs:
+  stockx: stockx/helpers@1
